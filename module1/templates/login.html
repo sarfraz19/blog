@@ -1,0 +1,141 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'login.css'  %}"
+    />
+    <style>
+      .header {
+        text-align: right;
+      }
+      body{
+        background-image: url(/static/bg-01.jpg);
+        background-position: center;
+        width: 100%;
+
+        height: 100%;
+        background-size: cover;
+        
+      }
+    </style>
+  </head>
+  <body >
+    <!-- <img src="{% static 'bg-01.jpg' %}" alt=""> -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6 center"></div>
+        <div class="col-md-6 header">
+          <form action="/" method="POST">
+            {% csrf_token %}
+            <input type="email" style="width: 30%" class="txt loginwidth" name="emaillog" placeholder="Email ID" />
+            <input type="password" style="width: 30%" name="passwordlog" class="loginwidth" placeholder="Password" />
+            <input type="submit" style="color: black;" value="Login">
+          </form>
+          <div>
+                {% for message in messages %}
+                <font size=3 style="color: white">{{ message }}</font>
+                {% endfor %}
+              </div>
+        </div>
+      </div>
+    </div>
+
+    <hr />
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6 center"></div>
+        <div class="wrapper">
+        
+        <div class="col-md-6 header" >
+          <div align="center">
+          <h1 style="color: white">Sign up! <br> It's free</h1>
+          <form method="POST" action="home">
+            {% csrf_token %}
+            <input type="text" name="name" placeholder="name" required /><br />
+            <input
+              type="email"
+              name="email"
+              class="txt"
+              placeholder="Email address"
+              required
+            /><br />
+            <input
+              type="password"
+              name="password"
+              placeholder="password"
+              required
+            /><br />
+            <input type="date" name="date" class="txt" required /><br />
+            <select name="gender" required class="txt">
+              <option value="volvo">Male</option>
+              <option value="saab">Female</option>
+              <option value="mercedes">Others</option> </select
+            ><br />
+            <input
+              value="Sign up"
+              style="color: black;" 
+              type="submit"
+              data-toggle="modal"
+      data-target="#ModalLoginForm"
+            >
+          </form>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="ModalLoginForm" class="modal fade">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title">Enter the OTP</h1>
+          </div>
+          <div class="modal-body">
+            <form role="form" method="POST" action="otp">
+             {% csrf_token %}
+              <!-- <input type="hidden" name="_token" value="" /> -->
+                 <input type="text" name="otpval" placeholder="OTP"> <br>
+                  <input type="submit" value="Login">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

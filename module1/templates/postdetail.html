@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% block content %}
+<h2>{{ object.title }}</h2>
+<h5>By {{ object.author }}</h5>
+<hr />
+<small
+  >posted on {{ object.published }} | last modified on
+  {{ object.lastmodified }}</small
+>
+<p>{{ object.content }}</p>
+{% if object.author == user%}
+<a class="btn btn-secondary mr-10 bt-sm" href="{% url 'post-update' object.id%}"
+  >Update</a
+>
+<a class="btn btn-danger bt-sm" href="{% url 'post-delete' object.id%}"
+  >Delete</a
+>
+{% endif %} {% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% block content %}
+<div class="col-md-3"></div>
+<div class="col-md-6">
+  <form action="postcreate" method="post">
+    {% csrf_token %}
+    <br />
+    <input
+      type="text"
+      name="title"
+      placeholder="Title"
+      value="{{ object.title }}"
+      class="input"
+      style="width: 300px"
+    /><br /><br />
+    <textarea
+      class="input"
+      name="description"
+      value="{{ object.content }}"
+      style="width: 300px;height:300px"
+    ></textarea
+    ><br />
+    <input type="submit" class="btn btn-danger" />
+  </form>
+</div>
+<div class="col-md-3"></div>
+
+{% endblock %}

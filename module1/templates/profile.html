@@ -1,0 +1,61 @@
+{% extends 'base.html' %} {% block content %}
+<div class="card">
+  <div class="card-horizontal">
+    <div class="card-body" style="text-align: left;">
+      <img
+        src="{{ user.images.image.url }}"
+        class="rounded"
+        width="150px"
+        height="150px"
+      />
+      <h4>{{ user.first_name }}</h4>
+    </div>
+    <!-- <div class="card-body" style="text-align: left;">
+      <label>
+        <h5>{{ user.first_name }}</h5> </label
+      ><br />
+      <label>
+        <h5>{{ user.email }}</h5>
+      </label>
+    </div> -->
+    <!-- <div class="card-body" style="padding: 35px;">
+      <label>
+        <h4>Balance</h4> </label
+      ><br />
+      <label>
+        <h4>{{ cus.balance }}</h4> </label
+      ><br />
+    </div> -->
+  </div>
+</div>
+{% for post in posts %}
+<br />
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <h2>{{ post.title }}</h2>
+      </div>
+      <div class="card-body">
+        <p class="card-text">
+          {{ post.content }}
+          <br /><br />
+          Published on:{{ post.published }}<br />
+          Last Modified :
+          {{ post.lastmodified }}
+        </p>
+        <a
+          class="btn btn-secondary mr-10 bt-sm"
+          href="{% url 'post-update' post.id%}"
+          >Update</a
+        >
+        <a class="btn btn-danger bt-sm" href="{% url 'post-delete' post.id%}"
+          >Delete</a
+        >
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+{% endfor %} {% endblock %}

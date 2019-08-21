@@ -1,0 +1,16 @@
+{% extends 'base.html' %} {% block content %}
+<fieldset class="border p-2 mx-auto" style="width: 550px;">
+  <legend class="w-auto">Delete Post</legend>
+  <form method="POST" class="p-3">
+    {% csrf_token %}
+    <h3>
+      Are you sure to delete the post {{ object.title }}? Click 'Yes' to delete
+    </h3>
+    <button class="btn btn-danger" type="submit">Yes, delete</button>
+    <a class="btn btn-secondary" href="{% url 'postpage'%}">
+      Cancel
+    </a>
+  </form>
+</fieldset>
+
+{% endblock%}

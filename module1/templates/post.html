@@ -1,0 +1,84 @@
+{% extends 'base.html' %} {% block content %}
+<div class="row">
+  <!-- <div class="col-md-"></div> -->
+  <div class="col-md-3 text-center">
+    <br />
+    <label><h3>Titles available</h3></label>
+    {% for key in article_list %}
+    <br /><a class="" href="{% url 'post-detail' key.pk %}"
+      ><button class="btn btn-primary" style="width: 100%">
+        {{ key.title }}
+      </button></a
+    >
+    {% endfor %}
+  </div>
+  <div class="col-md-8">
+    {% for key in article %}
+    <br />
+    <div class="card">
+      <div class="card-header">
+        <img
+          src="{{ key.author.images.image.url }}"
+          class="rounded"
+          width="32px"
+          height="32px"
+        />{{ key.author.first_name }}
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{ key.title }}</h5>
+        <p class="card-text">
+          {{ key.content }}
+          <br /><br />
+          Published on:{{ key.published }}<br />
+          Last Modified :
+          {{ key.lastmodified }}
+        </p>
+        <a href="{% url 'post-detail' key.pk %}" class="btn btn-primary"
+          >Read...</a
+        >
+      </div>
+    </div>
+
+    <!-- <h1>
+      <a class="" href="{% url 'post-detail' key.pk %}">{{ key.title }}</a>
+    </h1>
+    <br />
+    {{ key.content }}<br />
+    {{ key.author.first_name }}<br />
+    {{ key.published }}<br />
+    {{ key.lastmodified }}<br /><br /> -->
+    <!-- <a class="btn btn-danger" href="{% url 'post-delete' key.id%}">
+      delete
+    </a>
+    <a class="btn btn-primary" href="{% url 'post-update' key.id%}">update</a
+    ><br /> -->
+    {% endfor %}
+  </div>
+  <div class="col-md-1"></div>
+</div>
+
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4" align="center">
+    <div class="pagination">
+      <span class="step-links">
+        {% if article.has_previous %}
+        <a href="/?page=1">&laquo; first</a>
+        <a href="/?page={{ article.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+          Page {{ article.number }} of {{ article.paginator.num_pages }}.
+        </span>
+
+        {% if article.has_next %}
+        <a href="/?page={{ article.next_page_number }}">next</a>
+        <a href="/?page={{ article.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+      </span>
+    </div>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+
+{% endblock %}
